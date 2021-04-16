@@ -1,0 +1,7 @@
+{
+  "sendgrid": {
+    "welcomeEmailTemplate": "d-1c49b17dea164ffebf99659a426b24cc",
+    "firstActivityScheduleReminderTemplate": "d-9863644e6da547f69d22780aad570b4d",
+    "key": "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"
+  }
+}

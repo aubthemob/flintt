@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "94256225130",
+    "project_id": "flintt-prod",
+    "storage_bucket": "flintt-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94256225130:android:eba645f2a0260f02cda313",
+        "android_client_info": {
+          "package_name": "com.flintt.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94256225130-hof2tae420pc61ch9nb6k1e5bvepa3n1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiF63z1IEMWfhclqbm4un4xkRBSfYVCWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94256225130-hof2tae420pc61ch9nb6k1e5bvepa3n1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "94256225130-gfrtd2ka217d3aq7htad0h29l96coqof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flintt.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

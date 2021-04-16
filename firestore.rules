@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Collection group query rule for events
+    match /{users=**}/events/{eventId} {
+      allow read: if isLoggedIn() 
+        // && belongsTo(userId)
+      // allow read: if isInFriendsList(userId)
+    }
+
+    // Collection group query rule for conversations
+    match /{conversations=**}/messages/{messageId} {
+      allow read: if isLoggedIn() && isInParticipants() 
+    }
+    
+    // User collection rules
+    match /users/{userId} {
+
+      allow read, write: if isLoggedIn() && belongsTo(userId)
+      allow read, write: if isInFriendsList(userId) // Remove write permission 
+      allow read, write: if exists(/databases/$(database)/documents/users/$(userId)) // For the login and add friend - to change
+      // allow create: if request.resource.data == resource.data.friends && request.auth.uid == request.resource.data // allow friend to add themselves as a friend - REVIEW
+    
+      match /events/{eventId} {
+        allow read, write: if isLoggedIn() && belongsTo(userId)
+        allow read, write: if isInFriendsList(userId)
+      }
+
+      match /notifications/{notificationId} {
+        allow read, write: if isLoggedIn() && belongsTo(userId)
+        allow read, write: if isInFriendsList(userId)
+      }
+
+    }
+
+    match /conversations/{conversationId} {
+      allow read: if isLoggedIn() 
+      allow write: if isLoggedIn() && inEachOthersFriendListsConversation()
+
+      match /messages/{messageId} {
+        allow read: if isLoggedIn() // must add inEachOthersFriendListsMessageRead() - this is working in the rules console but not 
+        allow write: if isLoggedIn() && inEachOthersFriendListsMessageWrite()
+      }
+
+    }
+
+    function isInFriendsList(friendId) {
+      return request.auth.uid in get(/databases/$(database)/documents/users/$(friendId)).data.friends
+    }
+
+    function isLoggedIn() {
+      return request.auth.uid != null
+    }
+
+    function belongsTo(userId) {
+      return request.auth.uid == userId
+    }
+
+    function inEachOthersFriendListsMessageWrite() {
+      let receiverId = request.resource.data.receiverId;
+      let senderId = request.resource.data.senderId;
+      return receiverId in get(/databases/$(database)/documents/users/$(senderId)).data.friends &&
+        senderId in get(/databases/$(database)/documents/users/$(receiverId)).data.friends;
+    }
+
+    function inEachOthersFriendListsMessageRead() {
+      let receiverId = resource.data.receiverId;
+      let senderId = resource.data.senderId;
+      return request.auth.uid == resource.data.senderId || request.auth.uid == resource.data.receiverId;
+    }
+    
+    function inEachOthersFriendListsConversation() {
+        let participantZero = request.resource.data.participants[0];
+        let participantOne = request.resource.data.participants[1];
+        return participantZero in get(/databases/$(database)/documents/users/$(participantOne)).data.friends &&
+          participantOne in get(/databases/$(database)/documents/users/$(participantZero)).data.friends
+    }
+
+    function isInParticipants() {
+      return request.auth.uid in resource.data.participants || request.auth.uid in request.resource.data.participants
+    }
+
+  }
+} 

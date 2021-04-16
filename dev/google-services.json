@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1080402766056",
+    "firebase_url": "https://flintt-17227.firebaseio.com",
+    "project_id": "flintt-17227",
+    "storage_bucket": "flintt-17227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080402766056:android:c3b3323302ec771892415d",
+        "android_client_info": {
+          "package_name": "com.flintt.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080402766056-bgnk1qq8krg722a4lp725nco3nadd16a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSOACGXDVcHhb620armfsLK6ipEBlCu-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080402766056-bgnk1qq8krg722a4lp725nco3nadd16a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

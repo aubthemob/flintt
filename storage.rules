@@ -1,0 +1,21 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if isLoggedIn()
+    }
+  }
+
+  function isInFriendsList(friendId) {
+    return request.auth.uid in get(/databases/$(database)/documents/users/$(friendId)).data.friends
+  }
+
+  function isLoggedIn() {
+    return request.auth.uid != null
+  }
+
+  function belongsTo(userId) {
+    return request.auth.uid == userId
+  }
+
+}

@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "flintt-dev": "flintt-17227",
+    "flintt-prod": "flintt-prod"
+  }
+}
