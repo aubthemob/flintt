@@ -57,6 +57,7 @@ export default function ProfileScreen({ navigation }) {
     const [loadingThree, setLoadingThree] = useState(true)
     const [loadingFour, setLoadingFour] = useState(true)
     const [loadingFive, setLoadingFive] = useState(true)
+    const [loadingSix, setLoadingSix] = useState(true)
     
     const [snackbarVisible, setSnackbarVisible] = useState(false)
     const [snackbarMessage, setSnackbarMessage] = useState(false)
@@ -91,6 +92,10 @@ export default function ProfileScreen({ navigation }) {
 
     // thisweekstats state
     const [weeklyCompletionRate, setWeeklyCompletionRate] = useState([])
+
+    // success state
+    const [completeEvents, setCompleteEvents] = useState([])
+    const [allEvents, setAllEvents] = useState([])
     
     const { user } = useUserState()
     const route = useRoute()
@@ -140,12 +145,10 @@ export default function ProfileScreen({ navigation }) {
     }, [navigation])
 
     useEffect(() => {
-        if (!loadingOne && !loadingTwo && !loadingThree && !loadingFour && !loadingFive) {
-            console.log(loadingOne, loadingTwo, loadingThree, loadingFour, loadingFive)
-            console.log(loading)
+        if (!loadingOne && !loadingTwo && !loadingThree && !loadingFour && !loadingFive && !loadingSix) {
             setLoading(false)
         }
-    }, [loadingOne, loadingTwo, loadingThree, loadingFour, loadingFive])
+    }, [loadingOne, loadingTwo, loadingThree, loadingFour, loadingFive, loadingSix])
 
     useEffect(() => {
         setLoading(true)
@@ -361,6 +364,64 @@ export default function ProfileScreen({ navigation }) {
 
     }, [])
 
+    // success useEffect
+    useEffect(() => {
+
+        // setEventsLoading(true)
+        if (perspective === 'current-user') {
+            const unsubscribe = db.collection('users').doc(profileUserId)
+                .collection('events')
+                // .where('status', '==', 'complete')
+                .orderBy("startDateTime", "desc")
+                .onSnapshot(snapshot => {
+                    const rawEvents = snapshot.docs.map(s => ({
+                        eventId: s.id,
+                        // startDateTime: dayjs(s.startDateTime.seconds),
+                        // endDateTime: dayjs.unix(s.endDateTime.seconds),
+                        ...s.data(),
+                    }))
+    
+                    setAllEvents(rawEvents)
+
+                    const newCompleteEvents = rawEvents.filter(r => r.status === 'complete')
+    
+                    setCompleteEvents(newCompleteEvents)
+                    setLoadingSix(false)
+                    
+                })
+            
+            return unsubscribe
+        }
+
+        if (perspective === 'friend') {
+            const unsubscribe = db.collection('users').doc(profileUserId)
+                .collection('events')
+                .where("accountabilityPartners", "array-contains", user.uid)
+                // .where('status', '==', 'complete')
+                .orderBy("startDateTime", "desc")
+                .onSnapshot(snapshot => {
+                    setEventsLoading(true)
+                    const rawEvents = snapshot.docs.map(s => ({
+                        eventId: s.id,
+                        // startDateTime: dayjs.unix(s.startDateTime.seconds),
+                        // endDateTime: dayjs.unix(s.endDateTime.seconds),
+                        ...s.data(),
+                    }))
+    
+                    setAllEvents(rawEvents)
+
+                    const newCompleteEvents = rawEvents.filter(r => r.status === 'complete')
+    
+                    setCompleteEvents(newCompleteEvents)
+                    setLoadingSix(false)
+                    
+                })
+            
+            return unsubscribe
+        }
+
+    }, [])
+
     const getUser = async (userId) => {
         const newUser = await getSingleUser(userId)
         setFullUser(newUser)
@@ -430,6 +491,7 @@ export default function ProfileScreen({ navigation }) {
                         >
                             <PulseIndicator 
                                 color={theme.colors.primary}
+                                size={120}
                             /> 
                         </View>
                     :
@@ -584,7 +646,14 @@ export default function ProfileScreen({ navigation }) {
                             >
 
                                 <TouchableWithoutFeedback
-                                    onPress={() => setTabSelected('stats')}
+                                    onPress={() => {
+                                        scrollRef.current.scrollTo({
+                                            y: 0,
+                                            x: 0,
+                                            animated: true
+                                        })
+                                        setTabSelected('stats')
+                                    }}
                                 >
                                     <View
                                         style={tabSelected === 'stats' ? styles.tabSelectedView : styles.tabUnselectedView}
@@ -655,6 +724,8 @@ export default function ProfileScreen({ navigation }) {
                                         profileUserId={profileUserId}
                                         perspective={perspective}
                                         fullUser={fullUser}
+                                        completeEvents={completeEvents}
+                                        allEvents={allEvents}
                                     />
                             }
                         </>

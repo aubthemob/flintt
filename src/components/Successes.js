@@ -22,11 +22,11 @@ import { calendarConfig } from '../utils/calendar'
 import { checkAndSetFire, checkAndSetAchievement } from '../utils/eventsHelpers'
 
 
-export default function Successes({ profileUserId, perspective, fullUser }) {
+export default function Successes({ profileUserId, perspective, fullUser, completeEvents, allEvents }) {
 
-    const [eventsLoading, setEventsLoading] = useState(false)
-    const [completeEvents, setCompleteEvents] = useState([])
-    const [allEvents, setAllEvents] = useState([])
+    // const [eventsLoading, setEventsLoading] = useState(false)
+    // const [completeEvents, setCompleteEvents] = useState([])
+    // const [allEvents, setAllEvents] = useState([])
 
     const [imageSelected, setImageSelected] = useState(false)
     const [selectedImageUri, setSelectedImageUri] = useState('')
@@ -38,62 +38,62 @@ export default function Successes({ profileUserId, perspective, fullUser }) {
 
     const { user } = useUserState()
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (perspective === 'current-user') {
-            const unsubscribe = db.collection('users').doc(profileUserId)
-                .collection('events')
-                // .where('status', '==', 'complete')
-                .orderBy("startDateTime", "desc")
-                .onSnapshot(snapshot => {
-                    setEventsLoading(true)
-                    const rawEvents = snapshot.docs.map(s => ({
-                        id: s.id,
-                        // startDateTime: dayjs(s.startDateTime.seconds),
-                        // endDateTime: dayjs.unix(s.endDateTime.seconds),
-                        ...s.data(),
-                    }))
+    //     // setEventsLoading(true)
+    //     if (perspective === 'current-user') {
+    //         const unsubscribe = db.collection('users').doc(profileUserId)
+    //             .collection('events')
+    //             // .where('status', '==', 'complete')
+    //             .orderBy("startDateTime", "desc")
+    //             .onSnapshot(snapshot => {
+    //                 const rawEvents = snapshot.docs.map(s => ({
+    //                     eventId: s.id,
+    //                     // startDateTime: dayjs(s.startDateTime.seconds),
+    //                     // endDateTime: dayjs.unix(s.endDateTime.seconds),
+    //                     ...s.data(),
+    //                 }))
     
-                    setAllEvents(rawEvents)
+    //                 setAllEvents(rawEvents)
 
-                    const newCompleteEvents = rawEvents.filter(r => r.status === 'complete')
+    //                 const newCompleteEvents = rawEvents.filter(r => r.status === 'complete')
     
-                    setCompleteEvents(newCompleteEvents)
-                    setEventsLoading(false)
+    //                 setCompleteEvents(newCompleteEvents)
+    //                 // setEventsLoading(false)
                     
-                })
+    //             })
             
-            return unsubscribe
-        }
+    //         return unsubscribe
+    //     }
 
-        if (perspective === 'friend') {
-            const unsubscribe = db.collection('users').doc(profileUserId)
-                .collection('events')
-                .where("accountabilityPartners", "array-contains", user.uid)
-                // .where('status', '==', 'complete')
-                .orderBy("startDateTime", "desc")
-                .onSnapshot(snapshot => {
-                    setEventsLoading(true)
-                    const rawEvents = snapshot.docs.map(s => ({
-                        id: s.id,
-                        // startDateTime: dayjs.unix(s.startDateTime.seconds),
-                        // endDateTime: dayjs.unix(s.endDateTime.seconds),
-                        ...s.data(),
-                    }))
+    //     if (perspective === 'friend') {
+    //         const unsubscribe = db.collection('users').doc(profileUserId)
+    //             .collection('events')
+    //             .where("accountabilityPartners", "array-contains", user.uid)
+    //             // .where('status', '==', 'complete')
+    //             .orderBy("startDateTime", "desc")
+    //             .onSnapshot(snapshot => {
+    //                 setEventsLoading(true)
+    //                 const rawEvents = snapshot.docs.map(s => ({
+    //                     eventId: s.id,
+    //                     // startDateTime: dayjs.unix(s.startDateTime.seconds),
+    //                     // endDateTime: dayjs.unix(s.endDateTime.seconds),
+    //                     ...s.data(),
+    //                 }))
     
-                    setAllEvents(rawEvents)
+    //                 setAllEvents(rawEvents)
 
-                    const newCompleteEvents = rawEvents.filter(r => r.status === 'complete')
+    //                 const newCompleteEvents = rawEvents.filter(r => r.status === 'complete')
     
-                    setCompleteEvents(newCompleteEvents)
-                    setEventsLoading(false)
+    //                 setCompleteEvents(newCompleteEvents)
+    //                 // setEventsLoading(false)
                     
-                })
+    //             })
             
-            return unsubscribe
-        }
+    //         return unsubscribe
+    //     }
 
-    }, [])
+    // }, [])
 
     const handleImagePress = (uri, eventId) => {
         setSelectedImageUri(uri)
@@ -113,8 +113,8 @@ export default function Successes({ profileUserId, perspective, fullUser }) {
             endDateTime: dayjs.unix(c.endDateTime.seconds),
         }))
 
-        const isOnFire = checkAndSetFire(allEvents, item.activity, item.id)
-        const achievement = checkAndSetAchievement(eventsWithProperDate, item.habit, startDateTimeDayjs)
+        const isOnFire = checkAndSetFire(allEvents, item.activity, item.eventId)
+        const achievement = checkAndSetAchievement(eventsWithProperDate, item.habit, startDateTimeDayjs, item.eventId)
 
         return (
 
@@ -288,13 +288,13 @@ export default function Successes({ profileUserId, perspective, fullUser }) {
         }
     }
 
-    if (eventsLoading) {
-        return (
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator animating={true} color={theme.colors.primary} size='large' />
-            </View>
-        )
-    } else {
+    // if (eventsLoading) {
+    //     return (
+    //         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+    //             <ActivityIndicator animating={true} color={theme.colors.primary} size='large' />
+    //         </View>
+    //     )
+    // } else {
         return (
             <>
 
@@ -425,7 +425,7 @@ export default function Successes({ profileUserId, perspective, fullUser }) {
             </>
         )
     }
-}
+// }
 
 const styles = StyleSheet.create({
     toggleSelected: {

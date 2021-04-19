@@ -21,23 +21,25 @@ export const isEarliestEventToday = (itemId, events) => {
 export const checkAndSetFire = (allEvents, activity, eventId) => {
     const allEventsOfThisActivity = allEvents.filter(a => a.activity === activity)
     const sortedEvents = orderBy(allEventsOfThisActivity, ['startDateTime'], ['asc'])
-    const indexOfCurrentActivity = sortedEvents.findIndex(e => e.id === eventId)
+    const indexOfCurrentActivity = sortedEvents.findIndex(e => e.eventId === eventId)
     const eventsUpToThisActivity = sortedEvents.slice(0, indexOfCurrentActivity)
     const lastTwoEvents = orderBy(eventsUpToThisActivity, ['startDateTime'], ['desc']).map(i => i.status).slice(0, 2)
     const newIsOnFire = lastTwoEvents.length === 2 && uniq(lastTwoEvents).length === 1 && uniq(lastTwoEvents)[0] === 'complete'
+
     return newIsOnFire
 }
 
-export const checkAndSetAchievement = (allEvents, habit, startDateTime) => {
+export const checkAndSetAchievement = (allEvents, habit, startDateTime, eventId) => {
     const eventsOfThisHabit = allEvents.filter(a => a.habit === habit && a.status === 'complete' && a.startDateTime < startDateTime.endOf('day'))
-    const totalCompletedOfThisHabit = eventsOfThisHabit.length
-    const currentAchievement = ACHIEVEMENTS.find(a => a.qty === totalCompletedOfThisHabit)
+    const sortedEvents = orderBy(eventsOfThisHabit, ['startDateTime'], ['asc'])
+    const indexOfCurrentActivity = sortedEvents.findIndex(e => e.eventId === eventId) + 1
+    const currentAchievement = ACHIEVEMENTS.find(a => a.qty === indexOfCurrentActivity)
     const newAchievement = currentAchievement ? currentAchievement.symbol : ''
 
     return newAchievement
 }
 
-export const willBeAchievement = (allEvents, habit) => {
+export const willBeAchievement = (allEvents, habit, eventId) => {
     const eventsOfThisHabit = allEvents.filter(a => a.habit === habit && a.status === 'complete' && a.startDateTime < dayjs().endOf('day'))
     const totalNewCompletedOfThisHabit = eventsOfThisHabit.length + 1
     const currentAchievement = ACHIEVEMENTS.find(a => a.qty === totalNewCompletedOfThisHabit)
@@ -48,8 +50,9 @@ export const willBeAchievement = (allEvents, habit) => {
 
 export const willBeOnFire = (allEvents, activity, eventId) => {
     const allEventsOfThisActivity = allEvents.filter(a => a.activity === activity)
-    const indexOfCurrentActivity = allEventsOfThisActivity.findIndex(e => e.eventId === eventId)
-    const eventsUpToThisActivity = orderBy(allEventsOfThisActivity, ['startDateTime'], ['asc']).slice(0, indexOfCurrentActivity)
+    const sortedEvents = orderBy(allEventsOfThisActivity, ['startDateTime'], ['asc'])
+    const indexOfCurrentActivity = sortedEvents.findIndex(e => e.eventId === eventId)
+    const eventsUpToThisActivity = sortedEvents.slice(0, indexOfCurrentActivity)
     const lastTwoEvents = orderBy(eventsUpToThisActivity, ['startDateTime'], ['desc']).map(i => i.status).slice(0, 2)
     const newIsOnFire = lastTwoEvents.length === 2 && uniq(lastTwoEvents).length === 1 && uniq(lastTwoEvents)[0] === 'complete'
     return newIsOnFire

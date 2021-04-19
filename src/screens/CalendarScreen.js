@@ -230,6 +230,7 @@ export default function CalendarScreen({ navigation }) {
                 loading ? 
                     <PulseIndicator 
                         color={theme.colors.primary}
+                        size={120}
                     />
                 :
                     <View style={{ flex: 1, justifyContent: 'flex-start' }}>

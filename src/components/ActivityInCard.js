@@ -163,7 +163,7 @@ export default function ActivityInCard(props) {
 
     useEffect(() => {
 
-        const newAchievement = checkAndSetAchievement(allEvents, habit, startDateTime)
+        const newAchievement = checkAndSetAchievement(allEvents, habit, startDateTime, eventId)
         setAchievement(newAchievement)
 
     }, [allEvents, status])
@@ -175,7 +175,7 @@ export default function ActivityInCard(props) {
             await setSystemMessageService(user.uid, accountabilityPartners, status, user.displayName, activity, eventId)
             if (status === 'complete') {
                 setSnackbarVisible(true)
-                const symbol = willBeAchievement(allEvents, habit)
+                const symbol = willBeAchievement(allEvents, habit, eventId)
                 setCameraTooltipVisible(true)
                 
                 if (isOnFire && !symbol) {

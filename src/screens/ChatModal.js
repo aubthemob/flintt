@@ -132,7 +132,7 @@ export default function ChatModal({ navigation, route }) {
         const startDateTime = activityData.startDateTime.seconds ? dayjs.unix(activityData.startDateTime.seconds) : dayjs(activityData.startDateTime)
         const allEvents = activityData.userId === user.uid ? allUserEvents : allApEvents[activityData.userId]
         const isOnFire = checkAndSetFire(allEvents, activityData.activity, activityData.eventId)
-        const achievement = checkAndSetAchievement(allEvents, activityData.habit, startDateTime)
+        const achievement = checkAndSetAchievement(allEvents, activityData.habit, startDateTime, activityData.eventId)
 
         return {
             isOnFire, 

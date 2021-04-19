@@ -257,8 +257,6 @@ export default function FeedScreen({ navigation }) {
         setSnackbarMessage,
         setSnackbarVisible,
     }
-
-    console.log(loading)
         
     return (
             <>
@@ -270,6 +268,7 @@ export default function FeedScreen({ navigation }) {
                         loading ? 
                             <PulseIndicator 
                                 color={theme.colors.primary}
+                                size={120}
                             />
                             :
                                 <ScrollView
