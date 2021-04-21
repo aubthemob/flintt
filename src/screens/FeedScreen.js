@@ -32,7 +32,7 @@ import dayjs from 'dayjs'
 import * as firebase from 'firebase'
 import { db } from '../lib/firebase'
 import Modal from 'react-native-modal'
-import ContentLoader, { FacebookLoader, InstagramLoader } from 'react-native-easy-content-loader'
+// import ContentLoader, { FacebookLoader, InstagramLoader } from 'react-native-easy-content-loader'
 import { PulseIndicator } from 'react-native-indicators'
 
 

@@ -58,9 +58,7 @@ export default function App() {
       <SafeAreaProvider>
         <PaperProvider theme={theme}>
           <UserAuthProvider>
-              {/* <SafeAreaView style={{ flex: 1 }}> */}
-                <Navigator />
-              {/* </SafeAreaView> */}
+            <Navigator />
           </UserAuthProvider>
         </PaperProvider>
       </SafeAreaProvider>
