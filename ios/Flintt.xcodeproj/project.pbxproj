@@ -362,7 +362,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.Flintt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flintt.ios;
 				PRODUCT_NAME = Flintt;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -386,7 +386,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.Flintt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flintt.ios;
 				PRODUCT_NAME = Flintt;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

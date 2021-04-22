@@ -168,7 +168,7 @@ export default function FeedScreen({ navigation }) {
 
         setLoading(true)
 
-        const unsubscribeUsers = firestore().collection(`users`).doc(user.uid).collection('events')
+        const unsubscribeUsers = db.collection(`users`).doc(user.uid).collection('events')
             .orderBy('startDateTime')
             .onSnapshot(snapshot => {
                 const data = snapshot.docs.map(d => ({
