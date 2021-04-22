@@ -27,6 +27,7 @@ import { useUserState } from '../contexts/UserAuthContext'
 // Libs
 import Swiper from 'react-native-deck-swiper';
 import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
+import firestore from '@react-native-firebase/firestore'
 import groupBy from 'lodash/groupBy'
 import dayjs from 'dayjs'
 import * as firebase from 'firebase'
@@ -167,7 +168,7 @@ export default function FeedScreen({ navigation }) {
 
         setLoading(true)
 
-        const unsubscribeUsers = db.collection(`users`).doc(user.uid).collection('events')
+        const unsubscribeUsers = firestore().collection(`users`).doc(user.uid).collection('events')
             .orderBy('startDateTime')
             .onSnapshot(snapshot => {
                 const data = snapshot.docs.map(d => ({

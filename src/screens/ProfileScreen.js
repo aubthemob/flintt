@@ -400,7 +400,7 @@ export default function ProfileScreen({ navigation }) {
                 // .where('status', '==', 'complete')
                 .orderBy("startDateTime", "desc")
                 .onSnapshot(snapshot => {
-                    setEventsLoading(true)
+                    // setEventsLoading(true)
                     const rawEvents = snapshot.docs.map(s => ({
                         eventId: s.id,
                         // startDateTime: dayjs.unix(s.startDateTime.seconds),

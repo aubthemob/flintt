@@ -19,7 +19,7 @@ import { useUserState } from './src/contexts/UserAuthContext'
 
 // Libraries
 import { db, functions } from './src/lib/firebase'
-import * as Analytics from 'expo-firebase-analytics'
+// import * as Analytics from 'expo-firebase-analytics'
 import dayjs from 'dayjs'
 import axios from 'axios'
 
@@ -290,11 +290,11 @@ export default function Navigator() {
 
     }, [user])
 
-    useEffect(() => {
-        if (user) {
-            Analytics.setUserId(user.uid)
-        }
-    }, [user])
+    // useEffect(() => {
+    //     if (user) {
+    //         Analytics.setUserId(user.uid)
+    //     }
+    // }, [user])
 
     const prefix = Linking.makeUrl('/')
 
