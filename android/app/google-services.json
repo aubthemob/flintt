@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1080402766056",
+    "firebase_url": "https://flintt-17227.firebaseio.com",
+    "project_id": "flintt-17227",
+    "storage_bucket": "flintt-17227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080402766056:android:8c98c523e12d049092415d",
+        "android_client_info": {
+          "package_name": "com.flintt.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080402766056-jamj462e7kbjjmplt6om0b1qcl6ia36d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flintt.android",
+            "certificate_hash": "317e80784008a03a92d19b78e304da4c243b068e"
+          }
+        },
+        {
+          "client_id": "1080402766056-bgnk1qq8krg722a4lp725nco3nadd16a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSOACGXDVcHhb620armfsLK6ipEBlCu-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080402766056-bgnk1qq8krg722a4lp725nco3nadd16a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080402766056-1pal76uljcicc09i6jch8ti9qohur60p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flintt.ios",
+                "app_store_id": "1546556008"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

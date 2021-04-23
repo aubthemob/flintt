@@ -5,7 +5,6 @@ import { Text, View, SafeAreaView, Platform } from 'react-native'
 import { sendMessageButtonPressEvent } from '../utils/analyticsEvents'
 
 // Components
-import AccountabilityPartnerChatSwiper from '../components/AccountabilityPartnerChatSwiper'
 import CloseButton from '../components/UiComponents/CloseButton'
 
 // Contexts
