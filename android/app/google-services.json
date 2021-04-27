@@ -8,6 +8,51 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1080402766056:android:83a70bf8f452f75a92415d",
+        "android_client_info": {
+          "package_name": "com.flintt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080402766056-944u1cjesakct6g75qao49r7s2q1qmt8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flintt",
+            "certificate_hash": "317e80784008a03a92d19b78e304da4c243b068e"
+          }
+        },
+        {
+          "client_id": "1080402766056-bgnk1qq8krg722a4lp725nco3nadd16a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSOACGXDVcHhb620armfsLK6ipEBlCu-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080402766056-bgnk1qq8krg722a4lp725nco3nadd16a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080402766056-1pal76uljcicc09i6jch8ti9qohur60p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flintt.ios",
+                "app_store_id": "1546556008"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1080402766056:android:8c98c523e12d049092415d",
         "android_client_info": {
           "package_name": "com.flintt.android"

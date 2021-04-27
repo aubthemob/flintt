@@ -9,6 +9,7 @@ import GuestFederated from '../components/GuestFederated'
 import GuestEmail from '../components/GuestEmail'
 import PrivacyPolicy from '../components/PrivacyPolicy'
 import UxGuidePopup from '../components/UxGuidePopup'
+import OnboardingScreens from '../components/OnboardingScreens'
 
 // Contexts
 import { USER_AUTH_ACTIONS, useUserDispatch } from '../contexts/UserAuthContext'
@@ -161,73 +162,76 @@ export default function GuestScreen() {
 
             {
                 onboardingComplete === false ?
-                    <Onboarding 
-                        containerStyles={{
-                            // flexDirection: 'row',
-                            alignContent: 'center',
-                            // justifyContent: 'flex-start'
-                        }}
-                        showSkip={false}
-                        bottomBarHighlight={false}
-                        DoneButtonComponent={props => (
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 12 }}>
-                                <Text style={[styles.bodyText, { fontSize: 18, color: theme.colors.accent  }]} {...props} >Done</Text>
-                                <Avatar.Icon icon="chevron-right" size={32} backgroundColor="transparent" color={theme.colors.accent} />
-                            </View>
-                        )}
-                        NextButtonComponent={props => (
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 12 }}>
-                                <Text style={[styles.bodyText, { fontSize: 18, color: theme.colors.accent  }]} {...props} >Next</Text>
-                                <Avatar.Icon icon="chevron-right" size={32} backgroundColor="transparent" color={theme.colors.accent} />
-                            </View>
-                        )}
-                        titleStyles={styles.subtitleText}
-                        subTitleStyles={{ fontFamily: 'Ubuntu-Regular', color: theme.colors.text, marginHorizontal: 36 }}
-                        pages={[
-                            {
-                                backgroundColor: '#f0f2f5',
-                                image: <Image 
-                                    source={require('./images/Normal_logo_mod.png')} 
-                                    style={{ width: windowWidth/2, height: windowWidth/1.25/1.77 }}
-                                    resizeMode='contain'
-                                />,
-                                title: 'Stay healthy with your friends',
-                                subtitle: ''
-                            },
-                            {
-                                backgroundColor: '#f0f2f5',
-                                image: <Image 
-                                    source={require('./images/onboarding_1.png')} 
-                                    style={{ width: windowWidth/1.25, height: windowWidth/1.25/1.77 }}
-                                    resizeMode='contain'
-                                />,
-                                title: 'Plan',
-                                subtitle: "Design your ideal week and tag friends to keep you accountable",
-                            },
-                            {
-                                backgroundColor: '#f0f2f5',
-                                image: <Image 
-                                    source={require('./images/onboarding_2.png')} 
-                                    style={{ width: windowWidth/1.25, height: windowWidth/1.25/1.77 }}
-                                    resizeMode='contain'
-                                />,
-                                title: 'Share',
-                                subtitle: 'Track and share your daily progress with your friends',
-                            },
-                            {
-                                backgroundColor: '#f0f2f5',
-                                image: <Image 
-                                    source={require('./images/onboarding_3.png')} 
-                                    style={{ width: windowWidth/1.25, height: windowWidth/1.25/1.77 }}
-                                    resizeMode='contain'
-                                />,
-                                title: 'Encourage',
-                                subtitle: 'Encourage your friends to help them achieve their goals',
-                            },
-                        ]}
-                        onDone={() => setOnboardingComplete(true)}
-                        onSkip={() => setOnboardingComplete(true)}
-                    /> :
+                <OnboardingScreens />
+                    // <Onboarding 
+                    //     containerStyles={{
+                    //         // flexDirection: 'row',
+                    //         alignContent: 'center',
+                    //         // justifyContent: 'flex-start'
+                    //     }}
+                    //     showSkip={false}
+                    //     bottomBarHighlight={false}
+                    //     DoneButtonComponent={props => (
+                    //         <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 12 }}>
+                    //             <Text style={[styles.bodyText, { fontSize: 18, color: theme.colors.accent  }]} {...props} >Done</Text>
+                    //             <Avatar.Icon icon="chevron-right" size={32} backgroundColor="transparent" color={theme.colors.accent} />
+                    //         </View>
+                    //     )}
+                    //     NextButtonComponent={props => (
+                    //         <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 12 }}>
+                    //             <Text style={[styles.bodyText, { fontSize: 18, color: theme.colors.accent  }]} {...props} >Next</Text>
+                    //             <Avatar.Icon icon="chevron-right" size={32} backgroundColor="transparent" color={theme.colors.accent} />
+                    //         </View>
+                    //     )}
+                    //     titleStyles={styles.subtitleText}
+                    //     subTitleStyles={{ fontFamily: 'Ubuntu-Regular', color: theme.colors.text, marginHorizontal: 36 }}
+                    //     pages={[
+                    //         {
+                    //             backgroundColor: '#f0f2f5',
+                    //             image: <Image 
+                    //                 source={require('./images/Normal_logo_mod.png')} 
+                    //                 style={{ width: windowWidth/2, height: windowWidth/1.25/1.77 }}
+                    //                 resizeMode='contain'
+                    //             />,
+                    //             title: 'Stay healthy with your friends',
+                    //             subtitle: ''
+                    //         },
+                    //         {
+                    //             backgroundColor: '#f0f2f5',
+                    //             image: <Image 
+                    //                 source={require('./images/onboarding_1.png')} 
+                    //                 style={{ width: windowWidth/1.25, height: windowWidth/1.25/1.77 }}
+                    //                 resizeMode='contain'
+                    //             />,
+                    //             title: 'Plan',
+                    //             subtitle: "Design your ideal week and tag friends to keep you accountable",
+                    //         },
+                    //         {
+                    //             backgroundColor: '#f0f2f5',
+                    //             image: <Image 
+                    //                 source={require('./images/onboarding_2.png')} 
+                    //                 style={{ width: windowWidth/1.25, height: windowWidth/1.25/1.77 }}
+                    //                 resizeMode='contain'
+                    //             />,
+                    //             title: 'Share',
+                    //             subtitle: 'Track and share your daily progress with your friends',
+                    //         },
+                    //         {
+                    //             backgroundColor: '#f0f2f5',
+                    //             image: <Image 
+                    //                 source={require('./images/onboarding_3.png')} 
+                    //                 style={{ width: windowWidth/1.25, height: windowWidth/1.25/1.77 }}
+                    //                 resizeMode='contain'
+                    //             />,
+                    //             title: 'Encourage',
+                    //             subtitle: 'Encourage your friends to help them achieve their goals',
+                    //         },
+                    //     ]}
+                    //     onDone={() => setOnboardingComplete(true)}
+                    //     onSkip={() => setOnboardingComplete(true)}
+                    // /> 
+                    
+                    :
                     <KeyboardAwareScrollView 
                         keyboardShouldPersistTaps='always'
                         contentContainerStyle={{ flex: 0, justifyContent: 'space-around' }}

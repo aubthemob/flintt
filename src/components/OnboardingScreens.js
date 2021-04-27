@@ -6,7 +6,7 @@ import { registerForPushNotificationsAsync } from '../utils/pushNotifications'
 
 // Libs
 import auth from '@react-native-firebase/auth'
-import PagerView from 'react-native-pager-view'
+import PagerView from 'react-native-pager-view' 
 import Slider from "react-native-slider"
 
 import { Avatar, Button, IconButton, Snackbar } from 'react-native-paper'
@@ -103,8 +103,6 @@ export default function OnboardingScreens() {
             }
         }
     }
-
-    console.log(onboardingState)
 
     return (
         <PagerView initialPage={0} style={{ flex: 1 }} ref={pagerRef} scrollEnabled={false}>
