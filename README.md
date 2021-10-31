@@ -1,4 +1,4 @@
-# flintt
+# overview
 Flintt was a react native/firebase app to help people develop a healthier lifestyle by connecting them to their friends and family for motivation and support. The app was discontinued mid-sprint, so some features in the most recent commit are unfinished. 
 
 ## features
